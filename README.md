@@ -1,39 +1,92 @@
-# Assignment Five
-## Purpose
+# Movie API
 
-The purpose of this assignment is to create a React Single Page App over your developed API.  The interface will allow the users to search for movies, display information about the movie, see stored ratings, and allow the user to enter a rating.
+This is a web API for managing movies reviews. It allows users to sign up, sign in, create reviews for movies, and retrieve movie information along with their reviews. The API also includes functionality to track events using Google Analytics.
 
-## Pre-Requirements
-- Assignment 3 deployed REACT app that supports SignUp and Logon
-- Assignment 4 that supports reviews
+## Student Information
 
-## Requirements
-- Update your API to support storing an image (or image URL) for the movies you have stored.  You will use the image URL in your React application to show the image of movies
-    - New Attribute on the movie collection
-- For this assignment all your endpoints should be protected by JWT authentication
-- Implement the following interfaces
-    - User SignUp and User Logon
-        - Leverage your User mongoDB collection to store new users of the application
-    - Main screen should show the top rated movies (show at least 5)
-        - Your GET /movies endpoint should sort by rating (server side)
-            - Update your /movies (with reviews=true) endpoint to sort by average rating descending
-    - Movie Detail screen, shows the Movie, Image, Actors that were in the movie, aggregated rating for the movie and grid that shows the reviews (username, rating, review)
-    - Extra Credit: (7 points) - chapter 25 of (https://www.amazon.com/dp/B0979MGJ5J?_encoding=UTF8&psc=1&ref_=cm_sw_r_cp_ud_dp_M9YGPJNZWB3BK0P59QX3) Movie Search – show results in a grid, accordion or other list control
-        - Add Search API (HTTP POST) to the API that can take partial movie names or partial actor names
+- **Name:** Robin Shrestha
+- **Due Date:** March 10, 2024
 
-## Submissions
-- User is able to Sign-up (name, username, password)
-- User is able to Logon to the application (username, password)
-- User is able to see list of movies and select a movie to see the detail screen (top rated movies displayed)
-- User is able to enter a review on the detail page (enter a rating and comment) – the logged in user’s username will be associated with the review (as captured from the JSON Web Token)
+## Getting Started
 
-## Rubic
-- -3 Not able to add comments
-- -2 Not aggregating rating (average rating)
-- -3 if not pointed to correct end point (e.g Hw4 endpoint)
-- -5 if you don’t have a react web site deployed 
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-## Resources
-- https://github.com/facebook/create-react-app
-- https://github.com/mars/create-react-app-buildpack#user-content-requires
+### Prerequisites
+
+- Node.js
+- npm
+
+### Installing
+
+1. Clone the repository
+```zsh
+git clone https://github.com/ucdenver-compsci/csc3916_assignment4-rbnsth.git
+```
+
+2. Install dependencies
+```zsh
+cd current_Repository
+npm install
+```
+
+3. Start the server
+```zsh
+npm start
+```
+
+The server will start on `localhost:8000`.
+
+## Running the tests
+
+To run the tests, use the following command:
+
+```bash
+npm test
+```
+
+## Built With
+
+- [Node.js](https://nodejs.org/)
+- [Express](https://expressjs.com/)
+- [Mongoose](https://mongoosejs.com/)
+
+
+## API Endpoints
+
+### User Authentication
+
+- `POST /signup`: Create a new user account.
+- `POST /signin`: Sign in with an existing user account.
+
+### Movies
+
+- `GET /movies`: Get a list of all movies. Add the query parameter `reviews=true` to include reviews for each movie.
+
+### Reviews
+
+- `POST /reviews`: Create a new review for a movie.
+- `GET /reviews`: Get a list of all reviews.
+
+## Custom Analytics
+
+The API includes functionality to track events using Google Analytics. When a review is created, an event is sent to Google Analytics with the following information:
+
+- Event Category: Review
+- Event Action: /reviews
+- Event Label: API Request for Movie Review
+- Event Value: 1
+- Custom Dimension: Movie Name
+- Custom Metric: Requested: Value 1
+
+## Testing
+
+To test the API endpoints, you can use a tool like Postman. Import the provided Postman test collection and run the included tests to verify the functionality of the API.
+
+## Postman Enviroment: 
+- Collection: CSCI3916_HW4
+- Enviroment: Robin_HW4
+
+## Postman Link
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/32232262-7c353574-f179-4249-8913-1bc021d5d4b9?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D32232262-7c353574-f179-4249-8913-1bc021d5d4b9%26entityType%3Dcollection%26workspaceId%3Dca3c3d1e-eea4-46ea-b8aa-d5044f56b4cf#?env%5BRobin_HW5%5D=W3sia2V5IjoidG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0Iiwic2Vzc2lvblZhbHVlIjoiSldULi4uIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImJhc2ljIiwidmFsdWUiOiJZM1ZmZFhObGNqcGpkVjl5ZFd4bGVnPT0iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCIsInNlc3Npb25WYWx1ZSI6IlkzVmZkWE5sY2pwamRWOXlkV3hsZWc9PSIsInNlc3Npb25JbmRleCI6MX1d)
+
 
