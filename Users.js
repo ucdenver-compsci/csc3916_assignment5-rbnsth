@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise; // use the global promise library
 
 try {
     mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true }, () =>
@@ -11,7 +11,7 @@ try {
     console.log("could not connect");
 }
 
-mongoose.set('useCreateIndex', true);
+mongoose.set('useCreateIndex', true); // avoid deprecation warning
 
 //user schema
 var UserSchema = new Schema({
@@ -20,7 +20,7 @@ var UserSchema = new Schema({
     password: { type: String, required: true, select: false }
 });
 
-UserSchema.pre('save', function (next) {
+UserSchema.pre('save', function (next) { // hash the password before saving to the database
     var user = this;
 
     //hash the password
@@ -35,7 +35,7 @@ UserSchema.pre('save', function (next) {
     });
 });
 
-UserSchema.methods.comparePassword = function (password, callback) {
+UserSchema.methods.comparePassword = function (password, callback) { // compare the password
     var user = this;
 
     bcrypt.compare(password, user.password, function (err, isMatch) {

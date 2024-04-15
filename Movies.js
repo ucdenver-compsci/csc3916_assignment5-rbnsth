@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose'); // get the mongoose object
+var Schema = mongoose.Schema; // get the schema object
 
-const dbUrl = process.env.DB;
+const dbUrl = process.env.DB; // get the database URL from the environment variables
 
-mongoose.connect(dbUrl, {
+mongoose.connect(dbUrl, { // connect to the database
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -13,7 +13,7 @@ mongoose.connect(dbUrl, {
     .catch(err => console.log(err));
 
 // Movie schema
-const MovieSchema = new Schema({
+const MovieSchema = new Schema({ // define the schema
     title: { type: String, required: true, index: true },
     releaseDate: Date,
     genre: {
