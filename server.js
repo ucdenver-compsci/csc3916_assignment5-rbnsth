@@ -140,12 +140,18 @@ router.route('/movies/:id?')
                 { $match: query },
                 {
                     $lookup: {
-                        from: "reviews",
-                        localField: "_id",
-                        foreignField: "movieId",
-                        as: "reviews"
+                                from: "reviews",
+                                localField: "_id",
+                                foreignField: "movieId",
+                                as: "reviews"
+                            }
+                },
+                {
+                    $addFields: {
+                        avgRating: { $avg: "$reviews.rating" }
                     }
-                }
+                },
+                { $sort: { avgRating: -1 } }
             ]).exec(function (err, result) {
                 if (err) {
                     res.send(err);

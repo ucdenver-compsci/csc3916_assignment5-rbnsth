@@ -7,12 +7,17 @@ var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
 opts.secretOrKey = process.env.SECRET_KEY;
 
-passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    User.findById(jwt_payload.id, function (err, user) {
+passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
+    User.findOne({ id: jwt_payload.sub }, function (err, user) {
+        if (err) {
+            console.log(err);
+            return done(err, false);
+        }
         if (user) {
-            done(null, user);
+            return done(null, user);
         } else {
-            done(null, false);
+            console.log('User not found');
+            return done(null, false);
         }
     });
 }));
